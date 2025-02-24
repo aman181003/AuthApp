@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import Login from './components/Login';
+import Register from './components/Register';
+import MFAContainer from './components/MFAContainer';
+import SuccessPage from './components/SuccessPage';
+import ForgotPassword from './components/ForgotPassword';
+import './Global.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div style={styles.appContainer}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/mfa" element={<MFAContainer />} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
+
+const styles = {
+  appContainer: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '20px',
+    minHeight: '100vh',
+  },
+};
 
 export default App;
